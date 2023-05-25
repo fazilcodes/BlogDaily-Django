@@ -5,4 +5,4 @@ from django.http import HttpResponse
 
 def home(req):
     context = {}
-    return HttpResponse("Hello", context)
+    return HttpResponse("Hello")
