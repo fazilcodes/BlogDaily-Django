@@ -1,0 +1,114 @@
+.profile_page {
+    margin-top: 7rem;
+}
+
+.profile_container {
+    display: grid;
+    grid-template-columns: 40% 50%;
+    gap: 10%;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile_detail-edit {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.profile_detail-edit-btn {
+    background: var(--color-primary);
+    color: white;
+    padding: .5rem 1rem;
+}
+
+.profile_image-container {
+  width: 400px;
+  height: 400px;
+  overflow: hidden;
+  border-radius: 50%; 
+}
+
+.profile_image-container img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.profile_details-container {
+    border: 1px solid var(--color-white);
+    padding: 1rem;
+}
+
+.profile_posts-container {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.profile_posts {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 1rem;
+}
+
+.profile_post {
+    border: 1px solid var(--color-white);
+    padding:1rem;
+}
+
+.profile_page-edit {
+    padding: .3rem .5rem;
+    border: 1px solid green;
+    color: green;
+}
+
+.profile_page-delete {
+    padding: .3rem .5rem;
+    border: 1px solid red;
+    color: red;
+}
+
+.profile_blog-buttons {
+    margin-top: .5rem;
+}
+
+/* --------------------Media Queries-(Tablet)----------- */
+
+@media screen and (max-width: 1024px) {
+
+    .profile_image-container {
+        width: 300px; 
+        height: 300px;
+    }
+
+    .profile_posts {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+
+
+
+/* --------------------Media Queries-(mobile)----------- */
+
+@media screen and (max-width: 600px) {
+
+    .profile_image-container {
+        width: 200px; 
+        height: 200px;
+    }
+
+    /* .profile_container {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    } */
+
+    .profile_container {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .profile_posts {
+        grid-template-columns: 1fr;
+    }
+}

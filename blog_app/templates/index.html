@@ -19,14 +19,14 @@
 
             <ul class="nav_items">
                 <li><a href="">Home</a></li>
-                <li><a href="">Signin</a></li>
+                <li><a href="{% url 'signup' %}">Signin</a></li>
                 <li class="nav_profile">
                     <div class="avatar">
                         <img src="{% static 'images/avatar.jpg' %}" alt="">
                     </div>
                     <ul>
                         <li><a href="">Logout</a></li>
-                        <li><a href="">Account</a></li>
+                        <li><a href="{% url 'profile' %}">Account</a></li>
                         <li><a href="">Blogs</a></li>
                     </ul>
                 </li>

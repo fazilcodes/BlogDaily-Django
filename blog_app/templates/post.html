@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Icon -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <!-- custom css -->
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <title>Daily-Blog</title>
+</head>
+<body>
+    <!-- -------------Navbar------------------------ -->
+    <nav>
+        <div class="container nav_container">
+            <a href="/" class="nav_logo">BLOG DAILY</a>
+
+            <ul class="nav_items">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'signup' %}">Signin</a></li>
+                <li class="nav_profile">
+                    <div class="avatar">
+                        <img src="{% static 'images/avatar.jpg' %}" alt="">
+                    </div>
+                    <ul>
+                        <li><a href="">Logout</a></li>
+                        <li><a href="{% url 'profile' %}">Account</a></li>
+                        <li><a href="">Blogs</a></li><li><a href="">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <button id="open_nav-btn"><i class="uil uil-list-ul"></i></button>
+            <button id="close_nav-btn"><i class="uil uil-times"></i></button>
+        </div>
+    </nav>
+
+    <!-- -------------Navbar END------------------------ -->
+
+    <!-- -------------Single-Post----------------------- ------>
+
+    <section class="singlepost">
+        <div class="singlepost_container">
+            <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, tempore.</h2>
+            <div class="post_author">
+                <div class="post_author-avatar">
+                    <img src="{% static 'images/avatar.jpg' %}" alt="">
+                </div>
+                <div class="post_author-info">
+                    <h5>By: Fazilthekkan</h5>
+                    <small>April 13, 2023 - 10:00</small>
+                </div>
+            </div>
+            <div class="singlepost_thumbnail">
+                <img src="{% static 'images/avatar.jpg' %}" alt="">
+            </div>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni pariatur hic dolorum velit dicta doloremque ipsa iusto vero! Maiores delectus est beatae atque praesentium commodi nemo, eligendi nihil aspernatur dolor quae sapiente blanditiis consectetur quibusdam aperiam laudantium tempore voluptates. Dignissimos.</p>
+        </div>
+        <div class="single_post-comment">
+            <h2>Discussion</h2>
+            <form action="" class="comment_form">
+                <input type="text" class="comment_input" placeholder="type your Comment here...">
+                <button class="comment_btn btn btn-primary">comment</button>
+            </form>
+            <div class="comments_display">
+                <div class="comment">
+                    <p>@<span><a>Fazil: </a></span>this is my Comment as Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, iure eius voluptatibus eveniet dolorem suscipit corrupti non repellendus modi quis?</p>
+                    <p>@<span><a>Fazil: </a></span>this is my Comment</p>
+                    <p>@<span><a>Fazil: </a></span>this is my Comment</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- -------------Single-Post END----------------------- -->
+
+
+    <!-- -------------FOOTER------------------------ -->
+        
+    <Footer>
+        <div class="footer_copyright">
+            <small>copyright &copy BLOG DAILY</small>
+        </div>
+    </Footer>
+
+    <!-- -------------FOOTER END------------------------ -->
+
+
+
+
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
