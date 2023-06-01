@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>+Blog</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+</head>
+<body>
+    <!-- -------------Navbar------------------------ -->
+    <nav>
+        <div class="container nav_container">
+            <a href="/" class="nav_logo">BLOG DAILY</a>
+
+            <ul class="nav_items">
+                <li><a href="">Home</a></li>
+                <li><a href="">Signin</a></li>
+                <li class="nav_profile">
+                    <div class="avatar">
+                        <img src="{% static 'images/avatar.jpg' %}" alt="">
+                    </div>
+                    <ul>
+                        <li><a href="">Logout</a></li>
+                        <li><a href="">Account</a></li>
+                        <li><a href="">Blogs</a></li>
+                    </ul>
+                </li>
+                <li><a style="cursor: pointer;" href=""><i class="uil uil-plus-circle"></i>Blog</a></li>
+            </ul>
+
+            <button id="open_nav-btn"><i class="uil uil-list-ul"></i></button>
+            <button id="close_nav-btn"><i class="uil uil-times"></i></button>
+        </div>
+    </nav>
+    <!-- -------------Navbar END------------------------ -->
+    
+    <!---------------- Blog-Page------------------------ -->
+    <section style="width: 100vw; height: 100vh;">
+
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.media }}
+            {{ form.as_p }}
+            <input type="submit" name="" value="submit" id="">
+        </form>
+        
+    </section>
+    <!---------------- Blog-Page END------------------------ -->
+
+    <!-- -------------FOOTER------------------------ -->
+    
+    <Footer>
+        <div class="footer_copyright">
+            <small>copyright &copy BLOG DAILY</small>
+        </div>
+    </Footer>
+
+    <!-- -------------FOOTER END------------------------ -->
+
+
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
