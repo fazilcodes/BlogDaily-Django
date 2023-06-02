@@ -6,7 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>+Blog</title>
+    <!-- Icon -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
 </head>
 <body>
     <!-- -------------Navbar------------------------ -->
@@ -15,19 +19,19 @@
             <a href="/" class="nav_logo">BLOG DAILY</a>
 
             <ul class="nav_items">
-                <li><a href="">Home</a></li>
-                <li><a href="">Signin</a></li>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'signup' %}">Signin</a></li>
+                <li><a style="cursor: pointer;" href=""><i class="uil uil-plus-circle"></i>Blog</a></li>
                 <li class="nav_profile">
                     <div class="avatar">
                         <img src="{% static 'images/avatar.jpg' %}" alt="">
                     </div>
                     <ul>
+                        <li><a href="{% url 'profile' %}">Account</a></li>
+                        <li><a href="{% url 'addblog' %}">Blogs</a></li>
                         <li><a href="">Logout</a></li>
-                        <li><a href="">Account</a></li>
-                        <li><a href="">Blogs</a></li>
                     </ul>
                 </li>
-                <li><a style="cursor: pointer;" href=""><i class="uil uil-plus-circle"></i>Blog</a></li>
             </ul>
 
             <button id="open_nav-btn"><i class="uil uil-list-ul"></i></button>
@@ -35,19 +39,78 @@
         </div>
     </nav>
     <!-- -------------Navbar END------------------------ -->
-    
-    <!---------------- Blog-Page------------------------ -->
-    <section style="width: 100vw; height: 100vh;">
 
-        <form action="" method="post">
-            {% csrf_token %}
-            {{ form.media }}
-            {{ form.as_p }}
-            <input type="submit" name="" value="submit" id="">
-        </form>
-        
+    <!---------------- Blog-Page------------------------ -->
+
+    <section class="add_blog">
+        <h2 class="add_blog-title">Create Blog</h2>
+        <div class="container addblog_container">
+            <form action="">
+                <input type="text" class="addblog_input-title" placeholder="Title Here....">
+                <textarea name="" id="" cols="30" rows="10" placeholder="Content here..."></textarea>
+                <div class="form_inputs">
+                    <input type="text" class="addblog_category" placeholder="Category">
+                    <div class="form_input-image">
+                        <input type="file" id="file" accept="images/*">
+                        <label for="file">+ Upload Image</label>
+                    </div>
+                    <input type="submit" class="addblog_btn">
+                </div>
+            </form> 
+        </div>
+        <div class="container profile_posts-container">
+            <h2 style="text-align: center; margin-bottom: 2rem; text-decoration: underline;">Your Blogs</h3>
+            <div class="profile_posts">
+                <div class="profile_post">
+                    <div class="profile_blog-img">
+                        <img src="{% static 'images/avatar.jpg' %}" alt="">
+                    </div>
+                    <p class="profile_post-title">Title</p>
+                    <p class="profile_post-category">Development</p>
+                    <div class="profile_blog-buttons">
+                        <a href="" class="profile_page-edit">Edit</a>
+                        <a href="" class="profile_page-delete">Delete</a>
+                    </div>
+                </div>
+                <div class="profile_post">
+                    <div class="profile_blog-img">
+                        <img src="{% static 'images/avatar.jpg' %}" alt="">
+                    </div>
+                    <p class="profile_post-title">Title</p>
+                    <p class="profile_post-category">Development</p>
+                    <div class="profile_blog-buttons">
+                        <a href="" class="profile_page-edit">Edit</a>
+                        <a href="" class="profile_page-delete">Delete</a>
+                    </div>
+                </div>
+                <div class="profile_post">
+                    <div class="profile_blog-img">
+                        <img src="{% static 'images/avatar.jpg' %}" alt="">
+                    </div>
+                    <p class="profile_post-title">Title</p>
+                    <p class="profile_post-category">Development</p>
+                    <div class="profile_blog-buttons">
+                        <a href="" class="profile_page-edit">Edit</a>
+                        <a href="" class="profile_page-delete">Delete</a>
+                    </div>
+                </div>
+                <div class="profile_post">
+                    <div class="profile_blog-img">
+                        <img src="{% static 'images/avatar.jpg' %}" alt="">
+                    </div>
+                    <p class="profile_post-title">Title</p>
+                    <p class="profile_post-category">Development</p>
+                    <div class="profile_blog-buttons">
+                        <a href="" class="profile_page-edit">Edit</a>
+                        <a href="" class="profile_page-delete">Delete</a>
+                    </div>
+                </div>
+            </div>
     </section>
+
+
     <!---------------- Blog-Page END------------------------ -->
+
 
     <!-- -------------FOOTER------------------------ -->
     
@@ -61,5 +124,6 @@
 
 
     <script src="{% static 'js/main.js' %}"></script>
+
 </body>
 </html>

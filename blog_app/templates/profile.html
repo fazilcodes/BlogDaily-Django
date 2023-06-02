@@ -21,17 +21,17 @@
             <ul class="nav_items">
                 <li><a href="{% url 'home' %}">Home</a></li>
                 <li><a href="{% url 'signup' %}">Signin</a></li>
+                <li><a style="cursor: pointer;" href="{% url 'addblog' %}"><i class="uil uil-plus-circle"></i>Blog</a></li>
                 <li class="nav_profile">
                     <div class="avatar">
                         <img src="{% static 'images/avatar.jpg '%}" alt="">
                     </div>
                     <ul>
-                        <li><a href="">Logout</a></li>
                         <li><a href="{% url 'profile' %}">Account</a></li>
-                        <li><a href="">Blogs</a></li>
+                        <li><a href="{% url 'addblog' %}">Blogs</a></li>
+                        <li><a href="">Logout</a></li>
                     </ul>
                 </li>
-                <li><a style="cursor: pointer;" href=""><i class="uil uil-plus-circle"></i>Blog</a></li>
             </ul>
 
             <button id="open_nav-btn"><i class="uil uil-list-ul"></i></button>
