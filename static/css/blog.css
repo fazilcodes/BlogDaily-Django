@@ -106,3 +106,23 @@ label {
 .profile_blog-buttons {
     margin-top: .5rem;
 }
+
+
+
+
+/* ---------------MEdia QUery (Tablet)------------------ */
+
+@media screen and (max-width: 1024px) {
+    .profile_posts {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+
+/* ---------------MEdia QUery (Mobile)------------------ */
+
+@media screen and (max-width: 600px) {
+    .profile_posts {
+        grid-template-columns: 1fr 1fr;
+    }
+}
