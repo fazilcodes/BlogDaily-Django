@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 from django.contrib import auth
 from django.contrib import messages
 
-from .forms import BlogForm
 
 
 # Create your views here.
@@ -54,8 +53,7 @@ def Post(req):
 
 
 def Addblog(req):
-    form = BlogForm
-    context = {'form': form}
+    context = {}
     return render(req, 'blog.html', context)
     
 

@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-from ckeditor.fields import RichTextField
+
 
 
 
@@ -25,7 +25,8 @@ class UserProfileDB(models.Model):
 class BlogPostDB(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
-    body = RichTextField(blank=True, null=True)
+    blog_image = models.ImageField(upload_to="Post-Images", null=True, blank=True)
+    caption = models.TextField(blank=True)
     blog_date = models.DateField(auto_now_add=True)
     category = models.CharField(max_length=100)
 
