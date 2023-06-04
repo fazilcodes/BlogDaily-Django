@@ -20,14 +20,16 @@
 
             <ul class="nav_items">
                 <li><a href="{% url 'home' %}">Home</a></li>
+                {% if not request.user.is_authenticated %}
                 <li><a href="{% url 'signup' %}">Signin</a></li>
+                {% endif %}
                 <li><a style="cursor: pointer;" href="{% url 'addblog' %}"><i class="uil uil-plus-circle"></i>Blog</a></li>
                 <li class="nav_profile">
                     <div class="avatar">
-                        <img src="{% static 'images/avatar.jpg '%}" alt="">
+                        <img src="{{ profile.profile_image.url }}" alt="">
                     </div>
                     <ul>
-                        <li><a href="{% url 'profile' %}">Account</a></li>
+                        <li><a href="/profile/{{ profile.user }}">Account</a></li>
                         <li><a href="{% url 'addblog' %}">Blogs</a></li>
                         <li><a href="">Logout</a></li>
                     </ul>
@@ -49,7 +51,7 @@
         <div class="container profile_container">
 
             <div class="profile_image-container">
-                <img src="{% static 'images/imag2.jfif' %}" alt="">
+                <img src="{{ profile.profile_image.url }}" alt="">
             </div>
             <div class="profile_details-container">
                 <div class="profile_about">
@@ -58,8 +60,8 @@
                     ur tempora libero voluptates pariatur. Aut impedit alias aliquid blanditiis, eum quos earum ipsum hic minus porro quidem!</p>
                 </div>
                 <div class="profile_other">
-                    <p>Name: </p>
-                    <p>Profession: </p>
+                    <p>Name: {{ profile.user.username|capfirst }}</p>
+                    <p>Profession: {{ profile.profession|capfirst }}</p>
                     <p>Contact: </p>
                 </div>
                 <div class="profile_detail-edit">

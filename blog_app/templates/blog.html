@@ -20,14 +20,16 @@
 
             <ul class="nav_items">
                 <li><a href="{% url 'home' %}">Home</a></li>
+                {% if not request.user.is_authenticated %}
                 <li><a href="{% url 'signup' %}">Signin</a></li>
+                {% endif %}
                 <li><a style="cursor: pointer;" href=""><i class="uil uil-plus-circle"></i>Blog</a></li>
                 <li class="nav_profile">
                     <div class="avatar">
-                        <img src="{% static 'images/avatar.jpg' %}" alt="">
+                        <img src="{{ profile.profile_image.url }}" alt="">
                     </div>
                     <ul>
-                        <li><a href="{% url 'profile' %}">Account</a></li>
+                        <li><a href="/profile/{{ profile.user }}">Account</a></li>
                         <li><a href="{% url 'addblog' %}">Blogs</a></li>
                         <li><a href="">Logout</a></li>
                     </ul>
