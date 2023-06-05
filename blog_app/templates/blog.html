@@ -47,13 +47,14 @@
     <section class="add_blog">
         <h2 class="add_blog-title">Create Blog</h2>
         <div class="container addblog_container">
-            <form action="">
-                <input type="text" class="addblog_input-title" placeholder="Title Here....">
-                <textarea name="" id="" cols="30" rows="10" placeholder="Content here..."></textarea>
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="text" class="addblog_input-title" name="title" placeholder="Title Here....">
+                <textarea id="" cols="30" rows="10" name="caption" placeholder="Content here..."></textarea>
                 <div class="form_inputs">
-                    <input type="text" class="addblog_category" placeholder="Category">
+                    <input type="text" class="addblog_category" name="category" placeholder="Category">
                     <div class="form_input-image">
-                        <input type="file" id="file" accept="images/*">
+                        <input type="file" id="file" name="image" accept="images/*">
                         <label for="file">+ Upload Image</label>
                     </div>
                     <input type="submit" class="addblog_btn">

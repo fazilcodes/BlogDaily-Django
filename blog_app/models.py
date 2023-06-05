@@ -31,4 +31,4 @@ class BlogPostDB(models.Model):
     category = models.CharField(max_length=100)
 
     def __str__(self) -> str:
-        return self.author
+        return self.author.get_username()

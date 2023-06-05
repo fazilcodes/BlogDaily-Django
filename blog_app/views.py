@@ -5,7 +5,7 @@ from django.contrib import auth
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
-from .models import UserProfileDB
+from .models import UserProfileDB, BlogPostDB
 
 
 
@@ -63,6 +63,8 @@ def Profile(req, pk):
     user_object = User.objects.get(username=pk)
     profile = UserProfileDB.objects.get(user=user_object)
 
+    blogs = BlogPostDB.objects.filter(author=req.user)
+
     context = {'profile': profile}
     return render(req, "profile.html", context)
 
@@ -71,12 +73,23 @@ def Post(req):
     context = {}
     return render(req, "post.html", context)
 
-
+@login_required(login_url="signup")
 def Addblog(req):
 
     user_object = User.objects.get(username=req.user.username)
     profile = UserProfileDB.objects.get(user=user_object)
 
+    if req.method == 'POST':
+        author = req.user
+        title = req.POST.get("title")
+        caption = req.POST.get("caption")
+        image = req.FILES["image"]
+        category = req.POST.get("category")
+
+        addblog = BlogPostDB.objects.create(author=author, title=title, caption=caption, blog_image=image, category=category)
+        addblog.save()
+        return redirect("home")
+    
     context = {'profile': profile}
 
     return render(req, 'blog.html', context)
