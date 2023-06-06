@@ -65,7 +65,7 @@ def Profile(req, pk):
 
     blogs = BlogPostDB.objects.filter(author=req.user)
 
-    context = {'profile': profile}
+    context = {'profile': profile, 'blogs': blogs}
     return render(req, "profile.html", context)
 
 
@@ -90,7 +90,9 @@ def Addblog(req):
         addblog.save()
         return redirect("home")
     
-    context = {'profile': profile}
+    blogs = BlogPostDB.objects.filter(author=req.user)
+
+    context = {'profile': profile, 'blogs': blogs}
 
     return render(req, 'blog.html', context)
     

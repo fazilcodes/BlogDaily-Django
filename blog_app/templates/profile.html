@@ -72,50 +72,19 @@
         <div class="container profile_posts-container">
             <h2 style="text-align: center; margin-bottom: 2rem; text-decoration: underline;">Latest Blogs</h3>
             <div class="profile_posts">
+                {% for blog in blogs %}
                 <div class="profile_post">
                     <div class="profile_blog-img">
-                        <img src="{% static 'images/avatar.jpg' %}" alt="">
+                        <img src="{{ blog.blog_image.url }}" alt="">
                     </div>
-                    <p class="profile_post-title">Title</p>
-                    <p class="profile_post-category">Development</p>
+                    <p class="profile_post-title">{{ blog.title }}</p>
+                    <p class="profile_post-category">{{ blog.category }}</p>
                     <div class="profile_blog-buttons">
                         <a href="" class="profile_page-edit">Edit</a>
                         <a href="" class="profile_page-delete">Delete</a>
                     </div>
                 </div>
-                <div class="profile_post">
-                    <div class="profile_blog-img">
-                        <img src="{% static 'images/avatar.jpg' %}" alt="">
-                    </div>
-                    <p class="profile_post-title">Title</p>
-                    <p class="profile_post-category">Development</p>
-                    <div class="profile_blog-buttons">
-                        <a href="" class="profile_page-edit">Edit</a>
-                        <a href="" class="profile_page-delete">Delete</a>
-                    </div>
-                </div>
-                <div class="profile_post">
-                    <div class="profile_blog-img">
-                        <img src="{% static 'images/avatar.jpg' %}" alt="">
-                    </div>
-                    <p class="profile_post-title">Title</p>
-                    <p class="profile_post-category">Development</p>
-                    <div class="profile_blog-buttons">
-                        <a href="" class="profile_page-edit">Edit</a>
-                        <a href="" class="profile_page-delete">Delete</a>
-                    </div>
-                </div>
-                <div class="profile_post">
-                    <div class="profile_blog-img">
-                        <img src="{% static 'images/avatar.jpg' %}" alt="">
-                    </div>
-                    <p class="profile_post-title">Title</p>
-                    <p class="profile_post-category">Development</p>
-                    <div class="profile_blog-buttons">
-                        <a href="" class="profile_page-edit">Edit</a>
-                        <a href="" class="profile_page-delete">Delete</a>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
         

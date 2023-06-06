@@ -55,6 +55,27 @@
     padding:1rem;
 }
 
+/* ---- */
+.profile_blog-img {
+    width: 100%; /* Set the container width to 100% */
+    height: 0; /* Set initial height to 0 to maintain aspect ratio */
+    padding-bottom: 100%; /* Set padding based on a 1:1 aspect ratio (100% width) */
+    position: relative; /* Position the container */
+    overflow: hidden; /* Hide overflowing content */
+}
+
+.profile_blog-img img {
+    position: absolute; /* Position the image */
+    top: 0;
+    left: 0;
+    width: 100%; /* Set the image width to 100% of the container */
+    height: 100%; /* Set the image height to 100% of the container */
+    object-fit: cover; /* Scale and crop the image to cover the container */
+}
+  
+
+/* ----- */
+
 .profile_page-edit {
     padding: .3rem .5rem;
     border: 1px solid green;

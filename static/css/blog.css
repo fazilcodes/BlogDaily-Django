@@ -91,6 +91,23 @@ label {
     padding:1rem;
 }
 
+.profile_blog-img {
+    width: 100%; 
+    height: 0; 
+    padding-bottom: 100%; 
+    position: relative; 
+    overflow: hidden; 
+}
+
+.profile_blog-img img {
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+}
+
 .profile_page-edit {
     padding: .3rem .5rem;
     border: 1px solid green;
