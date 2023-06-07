@@ -49,12 +49,12 @@
         <div class="container addblog_container">
             <form id="addblogform" action="" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                <input type="text" class="addblog_input-title" name="title" placeholder="Title Here...." id="add_title">
-                <textarea id="" cols="30" rows="10" name="caption" placeholder="Content here..." id="add_caption"></textarea>
+                <input type="text" class="addblog_input-title" name="title" placeholder="Title Here...." id="add_title" required>
+                <textarea id="" cols="30" rows="10" name="caption" placeholder="Content here..." id="add_caption" required></textarea>
                 <div class="form_inputs">
-                    <input type="text" class="addblog_category" name="category" placeholder="Category" id="add_category">
+                    <input type="text" class="addblog_category" name="category" placeholder="Category" id="add_category" required>
                     <div class="form_input-image">
-                        <input type="file" id="file" name="image" accept="images/*" id="add_image">
+                        <input type="file" id="file" name="image" accept="images/*" id="add_image" required>
                         <label for="file">+ Upload Image</label>
                     </div>
                     <input type="submit" class="addblog_btn">
@@ -77,8 +77,11 @@
                     <p class="profile_post-title">{{ blog.title }}</p>
                     <p class="profile_post-category">{{ blog.category }}</p>
                     <div class="profile_blog-buttons">
-                        <a href="" class="profile_page-edit">Edit</a>
-                        <a href="" class="profile_page-delete">Delete</a>
+                        <div>
+                            <a href="" class="profile_page-edit"><i class="uil uil-edit"></i></a>
+                            <a href="" class="profile_page-delete"><i class="uil uil-trash"></i></a>
+                        </div>
+                        <a href="" class="profile_page-view">View</a>
                     </div>
                 </div>
                 {% endfor %}

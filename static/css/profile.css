@@ -77,19 +77,27 @@
 /* ----- */
 
 .profile_page-edit {
-    padding: .3rem .5rem;
+    padding: .2rem .4rem;
     border: 1px solid green;
     color: green;
 }
 
 .profile_page-delete {
-    padding: .3rem .5rem;
+    padding: .2rem .4rem;
     border: 1px solid red;
     color: red;
 }
 
 .profile_blog-buttons {
     margin-top: .5rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile_page-view {
+    padding: .2rem .4rem;
+    border: 1px solid var(--color-primary);
+    font-size: .8rem;
 }
 
 /* --------------------Media Queries-(Tablet)----------- */
@@ -132,4 +140,25 @@
     .profile_posts {
         grid-template-columns: 1fr;
     }
+}
+
+
+/* -------------Shake Animation--------- */
+
+.profile_page-delete {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.profile_page-delete:hover {
+    animation: shake 0.3s;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    10%, 90% { transform: translateX(-2px); }
+    20%, 80% { transform: translateX(2px); }
+    30%, 50%, 70% { transform: translateX(-1px); }
+    40%, 60% { transform: translateX(1px); }
+    100% { transform: translateX(0); }
 }

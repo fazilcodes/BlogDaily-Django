@@ -7,6 +7,8 @@ from django.contrib.auth.decorators import login_required
 
 from .models import UserProfileDB, BlogPostDB
 
+import random
+
 
 
 
@@ -17,8 +19,10 @@ from .models import UserProfileDB, BlogPostDB
 def Home(req):
     logged_in_user = User.objects.get(username=req.user.username)
     profile = UserProfileDB.objects.get(user=logged_in_user)
+    blogs = list(BlogPostDB.objects.all())
+    random.shuffle(blogs)
 
-    context = {'profile': profile}
+    context = {'profile': profile, 'blogs': blogs}
     return render(req, "index.html", context)
 
 
@@ -63,14 +67,19 @@ def Profile(req, pk):
     user_object = User.objects.get(username=pk)
     profile = UserProfileDB.objects.get(user=user_object)
 
-    blogs = BlogPostDB.objects.filter(author=req.user)
+    blogs = BlogPostDB.objects.filter(author=req.user).order_by('-id')[:4]
 
     context = {'profile': profile, 'blogs': blogs}
     return render(req, "profile.html", context)
 
 
-def Post(req):
-    context = {}
+def Post(req, id):
+    logged_in_user = User.objects.get(username=req.user.username)
+    profile = UserProfileDB.objects.get(user=logged_in_user)
+    blog = BlogPostDB.objects.get(id=id)
+
+
+    context = { 'blog': blog, 'profile':profile }
     return render(req, "post.html", context)
 
 @login_required(login_url="signup")
@@ -78,28 +87,6 @@ def Addblog(req):
 
     user_object = User.objects.get(username=req.user.username)
     profile = UserProfileDB.objects.get(user=user_object)
-
-    # if req.method == 'POST':
-    #     author = req.user
-    #     title = req.POST.get("title")
-    #     caption = req.POST.get("caption")
-    #     image = req.FILES.get("image")
-    #     category = req.POST.get("category")
-
-    #     if not title:
-    #         messages.info(req, "Forgot to add Title?")
-    #     elif not image:
-    #         messages.info(req, "Forgot to upload Image?")
-    #     elif not caption:
-    #         messages.info(req, "Forgot to add caption?")
-    #     elif not category:
-    #         messages.info(req, "Forgot to add category?")
-    #     else:
-    #         messages.info("Blog Added Successfully")
-    #         addblog = BlogPostDB.objects.create(author=author, title=title, caption=caption, blog_image=image, category=category)
-    #         addblog.save()
-    #         return redirect("home")
-
     blogs = BlogPostDB.objects.filter(author=req.user)
 
     context = {'profile': profile, 'blogs': blogs}
@@ -109,8 +96,11 @@ def Addblog(req):
 
 def AddBlog_Ajax(req):
 
+    author_profile = UserProfileDB.objects.get(user=req.user )
+
     if req.method == 'POST':
         author = req.user
+        author_profile = author_profile
         title = req.POST.get("title")
         caption = req.POST.get("caption")
         image = req.FILES.get("image")
@@ -120,7 +110,7 @@ def AddBlog_Ajax(req):
             return JsonResponse({'success': False, 'errors': 'Incomplete form data'})
 
         else:
-            addblog = BlogPostDB.objects.create(author=author, title=title, caption=caption, blog_image=image, category=category)
+            addblog = BlogPostDB.objects.create(author=author, author_profile=author_profile, title=title, caption=caption, blog_image=image, category=category)
             addblog.save()
 
             response_data = {

@@ -24,6 +24,7 @@ class UserProfileDB(models.Model):
 
 class BlogPostDB(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author_profile = models.ForeignKey(UserProfileDB, on_delete=models.CASCADE, blank=True, null=True)
     title = models.CharField(max_length=200)
     blog_image = models.ImageField(upload_to="Post-Images", null=True, blank=True)
     caption = models.TextField(blank=True)

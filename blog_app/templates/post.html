@@ -19,15 +19,17 @@
 
             <ul class="nav_items">
                 <li><a href="{% url 'home' %}">Home</a></li>
+                {% if not request.user.is_authenticated %}
                 <li><a href="{% url 'signup' %}">Signin</a></li>
-                <li><a style="cursor: pointer;" href=""><i class="uil uil-plus-circle"></i>Blog</a></li>
+                {% endif %}
+                <li><a style="cursor: pointer;" href="/blog"><i class="uil uil-plus-circle"></i>Blog</a></li>
                 <li class="nav_profile">
                     <div class="avatar">
-                        <img src="{% static 'images/avatar.jpg' %}" alt="">
+                        <img src="{{ profile.profile_image.url }}" alt="">
                     </div>
                     <ul>
-                        <li><a href="{% url 'profile' %}">Account</a></li>
-                        <li><a href="{% url 'addblog' %}">Blogs</a></li>
+                        <li><a href="/profile/{{ profile.user.username }}">Account</a></li>
+                        <li><a href="/blog">Blogs</a></li>
                         <li><a href="">Logout</a></li>
                     </ul>
                 </li>
@@ -44,20 +46,20 @@
 
     <section class="singlepost">
         <div class="singlepost_container">
-            <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, tempore.</h2>
+            <h2>{{ blog.title }}</h2>
             <div class="post_author">
                 <div class="post_author-avatar">
-                    <img src="{% static 'images/avatar.jpg' %}" alt="">
+                    <img src="{{ blog.author_profile.profile_image.url }}" alt="">
                 </div>
                 <div class="post_author-info">
-                    <h5>By: Fazilthekkan</h5>
-                    <small>April 13, 2023 - 10:00</small>
+                    <h5>By: {{ blog.author.username }}</h5>
+                    <small>{{ blog.blog_date }}</small>
                 </div>
             </div>
             <div class="singlepost_thumbnail">
-                <img src="{% static 'images/avatar.jpg' %}" alt="">
+                <img src="{{ blog.blog_image.url }}" alt="">
             </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni pariatur hic dolorum velit dicta doloremque ipsa iusto vero! Maiores delectus est beatae atque praesentium commodi nemo, eligendi nihil aspernatur dolor quae sapiente blanditiis consectetur quibusdam aperiam laudantium tempore voluptates. Dignissimos.</p>
+            <p>{{ blog.caption }}</p>
         </div>
         <div class="single_post-comment">
             <h2>Discussion</h2>
