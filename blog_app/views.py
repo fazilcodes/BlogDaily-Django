@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.models import User
 from django.contrib import auth
 from django.contrib import messages
@@ -79,23 +79,60 @@ def Addblog(req):
     user_object = User.objects.get(username=req.user.username)
     profile = UserProfileDB.objects.get(user=user_object)
 
-    if req.method == 'POST':
-        author = req.user
-        title = req.POST.get("title")
-        caption = req.POST.get("caption")
-        image = req.FILES["image"]
-        category = req.POST.get("category")
+    # if req.method == 'POST':
+    #     author = req.user
+    #     title = req.POST.get("title")
+    #     caption = req.POST.get("caption")
+    #     image = req.FILES.get("image")
+    #     category = req.POST.get("category")
 
-        addblog = BlogPostDB.objects.create(author=author, title=title, caption=caption, blog_image=image, category=category)
-        addblog.save()
-        return redirect("home")
-    
+    #     if not title:
+    #         messages.info(req, "Forgot to add Title?")
+    #     elif not image:
+    #         messages.info(req, "Forgot to upload Image?")
+    #     elif not caption:
+    #         messages.info(req, "Forgot to add caption?")
+    #     elif not category:
+    #         messages.info(req, "Forgot to add category?")
+    #     else:
+    #         messages.info("Blog Added Successfully")
+    #         addblog = BlogPostDB.objects.create(author=author, title=title, caption=caption, blog_image=image, category=category)
+    #         addblog.save()
+    #         return redirect("home")
+
     blogs = BlogPostDB.objects.filter(author=req.user)
 
     context = {'profile': profile, 'blogs': blogs}
 
     return render(req, 'blog.html', context)
-    
+
+
+def AddBlog_Ajax(req):
+
+    if req.method == 'POST':
+        author = req.user
+        title = req.POST.get("title")
+        caption = req.POST.get("caption")
+        image = req.FILES.get("image")
+        category = req.POST.get("category")
+
+        if not title or not caption or not category or not image:
+            return JsonResponse({'success': False, 'errors': 'Incomplete form data'})
+
+        else:
+            addblog = BlogPostDB.objects.create(author=author, title=title, caption=caption, blog_image=image, category=category)
+            addblog.save()
+
+            response_data = {
+                'success': True,
+                'msg': 'Data Saved',
+                'title': addblog.title,
+                'category': addblog.category,
+                'blog_image': addblog.blog_image.url  # Assuming 'blog_image' is a FileField in the BlogPostDB model
+            }
+
+            return JsonResponse(response_data)
+           
 
 
 

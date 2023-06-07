@@ -47,17 +47,22 @@
     <section class="add_blog">
         <h2 class="add_blog-title">Create Blog</h2>
         <div class="container addblog_container">
-            <form action="" method="post" enctype="multipart/form-data">
+            <form id="addblogform" action="" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                <input type="text" class="addblog_input-title" name="title" placeholder="Title Here....">
-                <textarea id="" cols="30" rows="10" name="caption" placeholder="Content here..."></textarea>
+                <input type="text" class="addblog_input-title" name="title" placeholder="Title Here...." id="add_title">
+                <textarea id="" cols="30" rows="10" name="caption" placeholder="Content here..." id="add_caption"></textarea>
                 <div class="form_inputs">
-                    <input type="text" class="addblog_category" name="category" placeholder="Category">
+                    <input type="text" class="addblog_category" name="category" placeholder="Category" id="add_category">
                     <div class="form_input-image">
-                        <input type="file" id="file" name="image" accept="images/*">
+                        <input type="file" id="file" name="image" accept="images/*" id="add_image">
                         <label for="file">+ Upload Image</label>
                     </div>
                     <input type="submit" class="addblog_btn">
+                    {% if messages %}
+                    {% for message in messages %}
+                    <p style="color: rgb(220, 78, 78);">{{ message }}</p>
+                    {% endfor %}
+                    {% endif %}
                 </div>
             </form> 
         </div>
@@ -78,6 +83,7 @@
                 </div>
                 {% endfor %}
             </div>
+        </div>
     </section>
 
 
@@ -96,6 +102,50 @@
 
 
     <script src="{% static 'js/main.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(() => {
+            $('#addblogform').submit(function(event) {
+                event.preventDefault()
+
+                var formdata = new FormData(this)
+
+                $.ajax({
+                    url: "{% url 'ajax' %}",
+                    type: 'POST',
+                    data: formdata,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        if (response.success) {
+                            console.log(response.msg);
+
+                            var newBlogHTML = `
+                                <div class="profile_post">
+                                <div class="profile_blog-img">
+                                    <img src="${response.blog_image}" alt="">
+                                </div>
+                                <p class="profile_post-title">${response.title}</p>
+                                <p class="profile_post-category">${response.category}</p>
+                                <div class="profile_blog-buttons">
+                                    <a href="" class="profile_page-edit">Edit</a>
+                                    <a href="" class="profile_page-delete">Delete</a>
+                                </div>
+                                </div>`
+                            ;
+
+                            $('.profile_posts').append(newBlogHTML)
+                            $('#addblogform')[0].reset();
+
+                        } else {
+                            console.log('Error');
+                        }
+                    }
+                })
+
+            })
+        })
+    </script>
 
 </body>
 </html>
