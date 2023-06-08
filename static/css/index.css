@@ -126,6 +126,12 @@ nav button {
     border: 0.3rem solid var(--color-bg);
 }
 
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 .nav_logo {
     font-weight: 600;
     font-size: 1.2rem;
@@ -542,6 +548,23 @@ footer {
    .popup_form {
     grid-template-columns: 1fr 1fr;
    }
+
+   .singlepost {
+    grid-template-columns: 1fr;
+    padding: 0rem 10rem;
+   }
+
+   .singlepost_thumbnail {
+    width: 400px;
+    height: 400px;
+    overflow: hidden;
+   }
+
+   .singlepost_thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+   }
 }
 
 
@@ -589,6 +612,16 @@ footer {
         top: 0;
         right: 105%;
         width: 70%;
+    }
+
+    .singlepost_container {
+        background: var(--color-primary-light);
+        padding: 1rem 2rem 2rem;
+    }
+
+    .singlepost_thumbnail {
+        width: 250px;
+        height: 250px;
     }
 }
 

@@ -22,6 +22,7 @@
                 {% if not request.user.is_authenticated %}
                 <li><a href="{% url 'signup' %}">Signin</a></li>
                 {% endif %}
+                {% if request.user.is_authenticated %}
                 <li><a style="cursor: pointer;" href="/blog"><i class="uil uil-plus-circle"></i>Blog</a></li>
                 <li class="nav_profile">
                     <div class="avatar">
@@ -30,9 +31,10 @@
                     <ul>
                         <li><a href="/profile/{{ profile.user.username }}">Account</a></li>
                         <li><a href="/blog">Blogs</a></li>
-                        <li><a href="">Logout</a></li>
+                        <li><a href="{% url 'logout' %}">Logout</a></li>
                     </ul>
                 </li>
+                {% endif %}
             </ul>
 
             <button id="open_nav-btn"><i class="uil uil-list-ul"></i></button>
@@ -63,10 +65,15 @@
         </div>
         <div class="single_post-comment">
             <h2>Discussion</h2>
+            {% if not request.user.is_authenticated %}
+            <a style="padding: .3rem .6rem; border: 1px solid var(--color-primary) ;" href="{% url 'signin' %}">Create An Account to Discuss</a>
+            {% endif %}
+            {% if request.user.is_authenticated %}
             <form action="" class="comment_form">
                 <input type="text" class="comment_input" placeholder="type your Comment here...">
                 <button class="comment_btn btn btn-primary">comment</button>
             </form>
+            {% endif %}
             <div class="comments_display">
                 <div class="comment">
                     <p>@<span><a>Fazil: </a></span>this is my Comment as Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, iure eius voluptatibus eveniet dolorem suscipit corrupti non repellendus modi quis?</p>

@@ -15,12 +15,16 @@ import random
 # Create your views here.
 # -------------------------------------------------------------------------------------------------------
 
-@login_required(login_url="signup")
 def Home(req):
-    logged_in_user = User.objects.get(username=req.user.username)
-    profile = UserProfileDB.objects.get(user=logged_in_user)
+
+    profile = None
     blogs = list(BlogPostDB.objects.all())
     random.shuffle(blogs)
+
+    if req.user.is_authenticated:
+        logged_in_user = User.objects.get(username=req.user)
+        profile = UserProfileDB.objects.get(user=logged_in_user)
+        
 
     context = {'profile': profile, 'blogs': blogs}
     return render(req, "index.html", context)
@@ -56,10 +60,31 @@ def SignUp(req):
         else:
             messages.info("Password Does Not Match")
             return redirect("signup")
-
-
+        
     context = {}
     return render(req, "LoginRegister.html", context)
+
+
+def  Signin(req):
+    if req.method == 'POST':
+        username = req.POST.get('signin_username')
+        password = req.POST.get('signin_password')
+
+        user = auth.authenticate(username=username, password=password)
+
+        if user is not None:
+            auth.login(req, user)
+            return redirect('home')
+        else:
+            messages.info(req, "Invalid Credentials")
+            return redirect("signin")
+    
+    return render(req, "LoginRegister.html")
+
+
+def Logout(req):
+    auth.logout(req)
+    return redirect('signin')
 
 
 def Profile(req, pk):
@@ -74,13 +99,18 @@ def Profile(req, pk):
 
 
 def Post(req, id):
-    logged_in_user = User.objects.get(username=req.user.username)
-    profile = UserProfileDB.objects.get(user=logged_in_user)
+
+    profile = None
     blog = BlogPostDB.objects.get(id=id)
+
+    if req.user.is_authenticated:
+        logged_in_user = User.objects.get(username=req.user.username)
+        profile = UserProfileDB.objects.get(user=logged_in_user)
 
 
     context = { 'blog': blog, 'profile':profile }
     return render(req, "post.html", context)
+
 
 @login_required(login_url="signup")
 def Addblog(req):
