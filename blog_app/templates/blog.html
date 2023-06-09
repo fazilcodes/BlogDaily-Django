@@ -8,12 +8,12 @@
     <title>+Blog</title>
     <!-- Icon -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
-
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
     <link rel="stylesheet" href="{% static 'css/blog.css' %}">
 </head>
 <body>
     <!-- -------------Navbar------------------------ -->
+
     <nav>
         <div class="container nav_container">
             <a href="/" class="nav_logo">BLOG DAILY</a>
@@ -40,6 +40,7 @@
             <button id="close_nav-btn"><i class="uil uil-times"></i></button>
         </div>
     </nav>
+
     <!-- -------------Navbar END------------------------ -->
 
     <!---------------- Blog-Page------------------------ -->
@@ -88,10 +89,29 @@
             </div>
         </div>
     </section>
-
-
+    
+    
     <!---------------- Blog-Page END------------------------ -->
 
+    <!-- -------------Popup-Form--------------- -->
+
+    <div id="popup" class="popup">
+        <form id="blogupdateform" action="" method="post">
+            <input type="text" class="popup_form-title" value="Title">
+            <textarea name="caption" class="popup_form-caption"  id="" cols="30" rows="10" >Hii</textarea>
+            <div class="form_input-image">
+                <input type="file" id="file" name="image" accept="images/*" id="add_image" required>
+                <label for="file" class="label_popup">+ Update Image</label>
+            </div>
+            <input type="text" class="popup_form-category" value="Category">
+            <div class="form_popup-btn">
+                <a id="close-btn">Close</a>
+                <a type="submit" class="addblog_btn-form">Update</a>
+            </div>
+        </form>  
+    </div>
+
+    <!-- -------------Popup-Form END--------------- -->
 
     <!-- -------------FOOTER------------------------ -->
     
@@ -102,7 +122,6 @@
     </Footer>
 
     <!-- -------------FOOTER END------------------------ -->
-
 
     <script src="{% static 'js/main.js' %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
@@ -148,6 +167,25 @@
 
             })
         })
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var editLink = document.querySelectorAll('.profile_page-edit');
+            var popup = document.getElementById('popup');
+            var closeBtn = document.getElementById('close-btn');
+
+            editLink.forEach((link) => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault()
+                    popup.style.display = 'flex'
+                })
+            })            
+            closeBtn.addEventListener('click', function(e) {
+                e.preventDefault()
+                popup.style.display = 'none';
+            });
+        });
+
     </script>
 
 </body>

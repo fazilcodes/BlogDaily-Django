@@ -152,6 +152,10 @@ def AddBlog_Ajax(req):
             }
 
             return JsonResponse(response_data)
+        
+
+def Updateblog(req):
+    pass
            
 
 
