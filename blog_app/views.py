@@ -117,7 +117,7 @@ def Addblog(req):
 
     user_object = User.objects.get(username=req.user.username)
     profile = UserProfileDB.objects.get(user=user_object)
-    blogs = BlogPostDB.objects.filter(author=req.user)
+    blogs = BlogPostDB.objects.filter(author=req.user).order_by('-blog_date')
 
     context = {'profile': profile, 'blogs': blogs}
 
@@ -154,8 +154,32 @@ def AddBlog_Ajax(req):
             return JsonResponse(response_data)
         
 
-def Updateblog(req):
-    pass
+def Updateblog(req, id):
+
+    blog = BlogPostDB.objects.get(id=id)
+
+    if req.method == 'POST':
+        if req.FILES.get('popup_image') is None:
+            image = blog.blog_image
+        else:
+            image = req.FILES.get('popup_image')
+
+        title = req.POST.get('popup_title')
+        category = req.POST.get('popup_category')
+        caption = req.POST.get('popup_caption')
+
+        blog.title = title
+        blog.caption = caption
+        blog.category = category
+        blog.blog_image = image
+        blog.save()
+
+        print("Form submitted")
+        return redirect('addblog')
+
+    context = {"blogid": blog}
+    return render(req, 'updateblog.html', context)
+
            
 
 

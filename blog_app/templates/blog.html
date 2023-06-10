@@ -79,12 +79,14 @@
                     <p class="profile_post-category">{{ blog.category }}</p>
                     <div class="profile_blog-buttons">
                         <div>
-                            <a href="" class="profile_page-edit"><i class="uil uil-edit"></i></a>
+                            <a href="{% url 'updateblog' blog.id %}" class="profile_page-edit"><i class="uil uil-edit"></i></a>
                             <a href="" class="profile_page-delete"><i class="uil uil-trash"></i></a>
                         </div>
-                        <a href="" class="profile_page-view">View</a>
+                        <a href="{% url 'post' blog.id %}" class="profile_page-view">View</a>
                     </div>
                 </div>
+                {% empty %}
+                <p>No blogs added yet</p>
                 {% endfor %}
             </div>
         </div>
@@ -92,26 +94,6 @@
     
     
     <!---------------- Blog-Page END------------------------ -->
-
-    <!-- -------------Popup-Form--------------- -->
-
-    <div id="popup" class="popup">
-        <form id="blogupdateform" action="" method="post">
-            <input type="text" class="popup_form-title" value="Title">
-            <textarea name="caption" class="popup_form-caption"  id="" cols="30" rows="10" >Hii</textarea>
-            <div class="form_input-image">
-                <input type="file" id="file" name="image" accept="images/*" id="add_image" required>
-                <label for="file" class="label_popup">+ Update Image</label>
-            </div>
-            <input type="text" class="popup_form-category" value="Category">
-            <div class="form_popup-btn">
-                <a id="close-btn">Close</a>
-                <a type="submit" class="addblog_btn-form">Update</a>
-            </div>
-        </form>  
-    </div>
-
-    <!-- -------------Popup-Form END--------------- -->
 
     <!-- -------------FOOTER------------------------ -->
     
@@ -168,7 +150,7 @@
             })
         })
     </script>
-    <script>
+    <!-- <script>
         document.addEventListener('DOMContentLoaded', function() {
             var editLink = document.querySelectorAll('.profile_page-edit');
             var popup = document.getElementById('popup');
@@ -186,7 +168,7 @@
             });
         });
 
-    </script>
+    </script> -->
 
 </body>
 </html>
