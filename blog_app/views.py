@@ -177,7 +177,7 @@ def Updateprofile(req, id):
         profile.profile_image = image
         profile.save()
 
-        return redirect('home')
+        return redirect('profile', pk=profile.user)
 
     context = {'profile': profile}
     return render(req, 'updateprofile.html', context)

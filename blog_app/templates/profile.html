@@ -88,10 +88,6 @@
                     <p class="profile_post-title">{{ blog.title }}</p>
                     <p class="profile_post-category">{{ blog.category }}</p>
                     <div class="profile_blog-buttons">
-                        <!-- <div>
-                            <a href="{% url 'updateblog' blog.id %}" class="profile_page-edit"><i class="uil uil-edit"></i></a>
-                            <a href="" class="profile_page-delete"><i class="uil uil-trash"></i></a>
-                        </div> -->
                         <a href="{% url 'post' blog.id %}" class="profile_page-view">View</a>
                     </div>
                 </div>

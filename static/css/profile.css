@@ -40,7 +40,7 @@
     flex-direction: column;
     /* justify-content: space-between; */
     width: 400px;
-    height: 400px;
+    height: auto;
     border: 1px solid var(--color-white);
     padding: 1rem;
 }
@@ -111,7 +111,6 @@
 
     .profile_details-container {
         width: 300px;
-        height: 300px;
     }
 
     .profile_image-container {
@@ -131,20 +130,10 @@
 
 @media screen and (max-width: 600px) {
 
-    .profile_details-container {
-        width: 300px;
-        height: 300px;
-    }
-
     .profile_image-container {
         width: 200px; 
         height: 200px;
     }
-
-    /* .profile_container {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    } */
 
     .profile_container {
         display: flex;
