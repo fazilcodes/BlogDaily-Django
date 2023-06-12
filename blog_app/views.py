@@ -148,11 +148,40 @@ def AddBlog_Ajax(req):
                 'msg': 'Data Saved',
                 'title': addblog.title,
                 'category': addblog.category,
-                'blog_image': addblog.blog_image.url  # Assuming 'blog_image' is a FileField in the BlogPostDB model
+                'blog_image': addblog.blog_image.url,
+                'id': addblog.id
             }
 
             return JsonResponse(response_data)
         
+
+# --------Update Views----------------
+
+def Updateprofile(req, id):
+
+    profile = UserProfileDB.objects.get(id=id)
+
+    if req.method == 'POST':
+        if req.FILES.get('update_image') is None:
+            image = profile.profile_image
+        else:
+            image = req.FILES.get('update_image')
+        
+        name = req.POST.get('update_name')
+        bio = req.POST.get('update_bio')
+        profession = req.POST.get('update_profession')
+
+        profile.profil_name = name
+        profile.bio = bio
+        profile.profession = profession
+        profile.profile_image = image
+        profile.save()
+
+        return redirect('home')
+
+    context = {'profile': profile}
+    return render(req, 'updateprofile.html', context)
+
 
 def Updateblog(req, id):
 

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update-Profile</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+    <link rel="stylesheet" href="{% static 'css/updateblog.css' %}">
+    <link rel="stylesheet" href="{% static 'css/updateprofile.css' %}">
+</head>
+<body>
+    <div id="popup" class="popup">
+        <form id="blogupdateform" action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="updateprofile_image">
+                <img src="{{ profile.profile_image.url }}" alt="">
+            </div>
+            <input type="text" name="update_name" class="popup_form-title" value="{{ profile.profil_name }}">
+            <textarea name="update_bio" class="popup_form-caption"  id="" cols="30" rows="5" >{{ profile.bio }}</textarea>
+            <div class="form_input-image">
+                <input type="file" id="file" name="update_image" accept="images/*" id="add_image">
+                <label for="file" class="label_popup">+ Update Image</label>
+            </div>
+            <input type="text" class="popup_form-category" name="update_profession" value="{{ profile.profession }}">
+            <div class="form_popup-btn">
+                <a id="close-btn">Close</a>
+                <input type="submit" value="Update" class="addblog_btn-form">
+            </div>
+        </form>  
+    </div>
+
+
+
+
+    <script>
+        document.getElementById("close-btn").addEventListener("click", function(event) {
+            event.preventDefault();
+            window.history.back();
+        });
+    </script>
+</body>
+
+</html>

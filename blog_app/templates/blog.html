@@ -132,13 +132,16 @@
                                 <p class="profile_post-title">${response.title}</p>
                                 <p class="profile_post-category">${response.category}</p>
                                 <div class="profile_blog-buttons">
-                                    <a href="" class="profile_page-edit">Edit</a>
-                                    <a href="" class="profile_page-delete">Delete</a>
+                                    <div>
+                                        <a href="/updateblog/${response.id}" class="profile_page-edit"><i class="uil uil-edit"></i></a>
+                                        <a href="" class="profile_page-delete"><i class="uil uil-trash"></i></a>
+                                    </div>
+                                    <a href="/post/${response.id}" class="profile_page-view">View</a>
                                 </div>
                                 </div>`
                             ;
 
-                            $('.profile_posts').append(newBlogHTML)
+                            $('.profile_posts').prepend(newBlogHTML)
                             $('#addblogform')[0].reset();
 
                         } else {

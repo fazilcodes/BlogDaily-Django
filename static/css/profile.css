@@ -12,7 +12,8 @@
 
 .profile_detail-edit {
     display: flex;
-    justify-content: flex-end;
+    align-self: flex-end;
+    justify-self: fe;
 }
 
 .profile_detail-edit-btn {
@@ -35,6 +36,11 @@
 }
 
 .profile_details-container {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
+    width: 400px;
+    height: 400px;
     border: 1px solid var(--color-white);
     padding: 1rem;
 }
@@ -72,7 +78,6 @@
     height: 100%; /* Set the image height to 100% of the container */
     object-fit: cover; /* Scale and crop the image to cover the container */
 }
-  
 
 /* ----- */
 
@@ -104,6 +109,11 @@
 
 @media screen and (max-width: 1024px) {
 
+    .profile_details-container {
+        width: 300px;
+        height: 300px;
+    }
+
     .profile_image-container {
         width: 300px; 
         height: 300px;
@@ -120,6 +130,11 @@
 /* --------------------Media Queries-(mobile)----------- */
 
 @media screen and (max-width: 600px) {
+
+    .profile_details-container {
+        width: 300px;
+        height: 300px;
+    }
 
     .profile_image-container {
         width: 200px; 

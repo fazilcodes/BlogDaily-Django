@@ -10,5 +10,6 @@ urlpatterns = [
     path('post/<int:id>', views.Post, name="post"),
     path('blog/', views.Addblog, name='addblog'),
     path('addblogajax', views.AddBlog_Ajax, name='ajax'),
-    path('updateblog/<int:id>', views.Updateblog, name="updateblog")
+    path('updateblog/<int:id>', views.Updateblog, name="updateblog"),
+    path('updateprofile/<int:id>', views.Updateprofile, name='updateprofile')
 ]

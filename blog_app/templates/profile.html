@@ -46,7 +46,6 @@
     <!-- --------------Profile Section--------------------->
 
     <section class="profile_page">
-        
         <h2 style="text-align: center; margin-bottom: 2rem; text-decoration: underline;">Profile</h2>
         <div class="container profile_container">
 
@@ -55,17 +54,26 @@
             </div>
             <div class="profile_details-container">
                 <div class="profile_about">
-                    <h5 style="text-align: center; margin-bottom: 1rem;">About</h5>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos libero voluptatum porro deserunt, voluptate adipisci aspernatur quia id sint possimus blanditiis modi rerum, reprehenderit saepe enim est soluta quas quam in dolore nobis tenetur. Reprehenderit deleniti dignissimos sint aliquam commodi voluptatibus, sapiente perferendis tempora vitae odio ullam? Quasi aspernatur quae nesciunt sed beatae fugit illum, deserunt eaque debitis labore cum assumenda, ipsam voluptates! Laboriosam sit commodi deleniti nobis voluptas 
-                    ur tempora libero voluptates pariatur. Aut impedit alias aliquid blanditiis, eum quos earum ipsum hic minus porro quidem!</p>
+                    <h5 style="text-align: center; margin-bottom: 1rem; font-size: 1rem;">About</h5>
+                    {% if profile.bio %}
+                    <p>{{ profile.bio }}</p>
+                    {% endif %}
                 </div>
                 <div class="profile_other">
+                    {% if profile.profil_name %}
+                    <p>Name: {{ profile.profil_name|capfirst }}</p>
+                    {% else %}
                     <p>Name: {{ profile.user.username|capfirst }}</p>
+                    {% endif %}
+                    {% if profile.profession %}
                     <p>Profession: {{ profile.profession|capfirst }}</p>
+                    {% endif %}
+                    {% if profile.contact %}
                     <p>Contact: </p>
+                    {% endif %}
                 </div>
                 <div class="profile_detail-edit">
-                    <a href="" class="profile_detail-edit-btn">Edit Profile</a>
+                    <a href="/updateprofile/{{profile.id}}" class="profile_detail-edit-btn">Edit Profile</a>
                 </div>
             </div>
         </div>

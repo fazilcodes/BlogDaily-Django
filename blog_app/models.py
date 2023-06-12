@@ -14,6 +14,7 @@ User = get_user_model()
 
 class UserProfileDB(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    profil_name = models.CharField(max_length=200, null=True, blank=True)
     bio = models.TextField(blank=True)
     profile_image = models.ImageField(upload_to="Profile_Pictures", blank=True, default="default_profile.png")
     profession = models.CharField(max_length=200, blank=True, null=True)
