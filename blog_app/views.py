@@ -117,7 +117,7 @@ def Addblog(req):
 
     user_object = User.objects.get(username=req.user.username)
     profile = UserProfileDB.objects.get(user=user_object)
-    blogs = BlogPostDB.objects.filter(author=req.user).order_by('-blog_date')
+    blogs = BlogPostDB.objects.filter(author=req.user).order_by('-id')
 
     context = {'profile': profile, 'blogs': blogs}
 

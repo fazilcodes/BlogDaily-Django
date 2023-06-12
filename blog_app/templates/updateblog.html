@@ -8,15 +8,19 @@
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
     <link rel="stylesheet" href="{% static 'css/blog.css' %}">
     <link rel="stylesheet" href="{% static 'css/updateblog.css' %}">
+    <link rel="stylesheet" href="{% static 'css/updateprofile.css' %}">
 </head>
 <body>
     <div id="popup" class="popup">
         <form id="blogupdateform" action="{% url 'updateblog' blogid.id %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
+            <div class="updateprofile_image">
+                <img id="showpreview" src="{{ blogid.blog_image.url }}" alt="">
+            </div>
             <input type="text" name="popup_title" class="popup_form-title" value="{{ blogid.title }}">
-            <textarea name="popup_caption" class="popup_form-caption"  id="" cols="30" rows="10" >{{ blogid.caption }}</textarea>
+            <textarea name="popup_caption" class="popup_form-caption"  id="" cols="30" rows="5" >{{ blogid.caption }}</textarea>
             <div class="form_input-image">
-                <input type="file" id="file" name="popup_image" accept="images/*" id="add_image">
+                <input type="file" id="file" name="popup_image" onchange="previewImage(event)" accept="images/*" id="add_image">
                 <label for="file" class="label_popup">+ Update Image</label>
             </div>
             <input type="text" class="popup_form-category" name="popup_category" value="{{ blogid.category }}">
@@ -33,5 +37,11 @@
         event.preventDefault();
         window.history.back();
     });
+
+    previewImage = (event) => {
+        let image = URL.createObjectURL(event.target.files[0]);
+        let imagediv = document.getElementById('showpreview')
+        imagediv.src = image
+    }
 </script>
 </html>
