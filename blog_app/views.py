@@ -5,7 +5,7 @@ from django.contrib import auth
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
-from .models import UserProfileDB, BlogPostDB
+from .models import UserProfileDB, BlogPostDB, CommentsDB
 
 import random
 
@@ -90,11 +90,13 @@ def Logout(req):
 def Profile(req, pk):
 
     user_object = User.objects.get(username=pk)
+    logged_in_user = User.objects.get(username=req.user.username)
     profile = UserProfileDB.objects.get(user=user_object)
+    nav_image = UserProfileDB.objects.get(user=logged_in_user)
 
-    blogs = BlogPostDB.objects.filter(author=req.user).order_by('-id')[:4]
+    blogs = BlogPostDB.objects.filter(author=user_object).order_by('-id')[:4]
 
-    context = {'profile': profile, 'blogs': blogs}
+    context = {'profile': profile, 'blogs': blogs, 'nav_image': nav_image}
     return render(req, "profile.html", context)
 
 
@@ -102,13 +104,14 @@ def Post(req, id):
 
     profile = None
     blog = BlogPostDB.objects.get(id=id)
+    comments = CommentsDB.objects.filter(post=id)
 
     if req.user.is_authenticated:
         logged_in_user = User.objects.get(username=req.user.username)
         profile = UserProfileDB.objects.get(user=logged_in_user)
 
 
-    context = { 'blog': blog, 'profile':profile }
+    context = { 'blog': blog, 'profile':profile, 'comments': comments }
     return render(req, "post.html", context)
 
 

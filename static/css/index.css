@@ -426,6 +426,19 @@ footer {
     gap: 1rem;
 }
 
+.comment_box {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+}
+
+.comment_box-profile img {
+    width: 2.5rem;
+    height: 2.5rem;
+    object-fit: cover;
+    border-radius: 50%;
+}
 
 
 /* -------------------------------------------------- MEDIA QUERY (MEDIUM) ---------------------------------------------------------- */

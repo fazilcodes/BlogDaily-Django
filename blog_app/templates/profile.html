@@ -26,10 +26,10 @@
                 <li><a style="cursor: pointer;" href="{% url 'addblog' %}"><i class="uil uil-plus-circle"></i>Blog</a></li>
                 <li class="nav_profile">
                     <div class="avatar">
-                        <img src="{{ profile.profile_image.url }}" alt="">
+                        <img src="{{ nav_image.profile_image.url }}" alt="">
                     </div>
                     <ul>
-                        <li><a href="/profile/{{ profile.user }}">Account</a></li>
+                        <li><a href="/profile/{{ nav_image.user }}">Account</a></li>
                         <li><a href="{% url 'addblog' %}">Blogs</a></li>
                         <li><a href="{% url 'logout' %}">Logout</a></li>
                     </ul>
@@ -72,9 +72,11 @@
                     <p>Contact: </p>
                     {% endif %}
                 </div>
+                {% if profile.user == request.user %}
                 <div class="profile_detail-edit">
                     <a href="/updateprofile/{{profile.id}}" class="profile_detail-edit-btn">Edit Profile</a>
                 </div>
+                {% endif %}
             </div>
         </div>
         <div class="container profile_posts-container">

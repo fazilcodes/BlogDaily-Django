@@ -76,9 +76,17 @@
             {% endif %}
             <div class="comments_display">
                 <div class="comment">
-                    <p>@<span><a>Fazil: </a></span>this is my Comment as Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, iure eius voluptatibus eveniet dolorem suscipit corrupti non repellendus modi quis?</p>
-                    <p>@<span><a>Fazil: </a></span>this is my Comment</p>
-                    <p>@<span><a>Fazil: </a></span>this is my Comment</p>
+                    {% if not comment in comments %}
+                    <p>No  comments Yet...</p>
+                    {% endif %}
+                    {% for comment in comments %}
+                    <div class="comment_box">
+                        <div class="comment_box-profile">
+                            <img src="{{ comment.commented_by.profile_image.url }}" alt="">
+                        </div>
+                        <p>@<span><a href="{% url 'profile' comment.commented_by.user.username %}" style="cursor: pointer;">{{ comment.commented_by.user.username }}: </a></span>{{ comment.comment }}</p>
+                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>

@@ -34,3 +34,13 @@ class BlogPostDB(models.Model):
 
     def __str__(self) -> str:
         return self.author.get_username()
+
+
+class CommentsDB(models.Model):
+    post = models.ForeignKey(BlogPostDB, on_delete=models.CASCADE)
+    commented_by = models.ForeignKey(UserProfileDB, on_delete=models.CASCADE)
+    comment = models.TextField()
+    commented_on = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.commented_by.user.username}: {self.comment[:10]}'
