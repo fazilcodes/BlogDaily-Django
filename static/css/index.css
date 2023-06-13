@@ -384,10 +384,21 @@ footer {
 .singlepost_container {
     background: var(--color-primary-light);
     padding: 1rem 2rem 2rem;
+    height: max-content;
 }
 
 .singlepost_thumbnail {
     margin: 1.5rem 0 1rem;
+    overflow: hidden;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+}
+
+.singlepost_thumbnail img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
 }
 
 

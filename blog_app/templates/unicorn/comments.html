@@ -1,0 +1,26 @@
+<div>
+    <!-- put component code here -->
+            {% if request.user.is_authenticated %}
+            <form action="" class="comment_form">
+                {% csrf_token %}
+                <input type="text" unicorn:model="comment" class="comment_input" placeholder="type your Comment here..." required>
+                <button unicorn:click.prevent="add_comment" type="submit" class="comment_btn btn btn-primary">comment</button>
+            </form>
+            {% endif %}
+            <div class="comments_display">
+                <div class="comment">
+                    {% if comments %}
+                    {% for comment in comments %}
+                    <div class="comment_box">
+                        <div class="comment_box-profile">
+                            <img src="{{ comment.commented_by.profile_image.url }}" alt="">
+                        </div>
+                        <p>@<span><a href="{% url 'profile' comment.commented_by.user.username %}" style="cursor: pointer;">{{ comment.commented_by.user.username }}: </a></span>{{ comment.comment }}</p>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <p>No comments yet...</p>
+                    {% endif %}
+                </div>
+            </div>
+</div>

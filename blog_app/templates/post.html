@@ -1,3 +1,4 @@
+{% load unicorn %}
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
@@ -10,8 +11,11 @@
     <!-- custom css -->
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
     <title>Daily-Blog</title>
+
+    {% unicorn_scripts %}
 </head>
 <body>
+    {% csrf_token %}
     <!-- -------------Navbar------------------------ -->
     <nav>
         <div class="container nav_container">
@@ -66,29 +70,10 @@
         <div class="single_post-comment">
             <h2>Discussion</h2>
             {% if not request.user.is_authenticated %}
-            <a style="padding: .3rem .6rem; border: 1px solid var(--color-primary) ;" href="{% url 'signin' %}">Create An Account to Discuss</a>
+                <a style="padding: .3rem .6rem; border: 1px solid var(--color-primary);" href="{% url 'signin' %}">Create An Account to Discuss</a>
+            {% else %}
+                {% unicorn 'comments' blogid=blog.id %}
             {% endif %}
-            {% if request.user.is_authenticated %}
-            <form action="" class="comment_form">
-                <input type="text" class="comment_input" placeholder="type your Comment here...">
-                <button class="comment_btn btn btn-primary">comment</button>
-            </form>
-            {% endif %}
-            <div class="comments_display">
-                <div class="comment">
-                    {% if not comment in comments %}
-                    <p>No  comments Yet...</p>
-                    {% endif %}
-                    {% for comment in comments %}
-                    <div class="comment_box">
-                        <div class="comment_box-profile">
-                            <img src="{{ comment.commented_by.profile_image.url }}" alt="">
-                        </div>
-                        <p>@<span><a href="{% url 'profile' comment.commented_by.user.username %}" style="cursor: pointer;">{{ comment.commented_by.user.username }}: </a></span>{{ comment.comment }}</p>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
         </div>
     </section>
 

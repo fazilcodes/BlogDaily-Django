@@ -104,14 +104,13 @@ def Post(req, id):
 
     profile = None
     blog = BlogPostDB.objects.get(id=id)
-    comments = CommentsDB.objects.filter(post=id)
 
     if req.user.is_authenticated:
         logged_in_user = User.objects.get(username=req.user.username)
         profile = UserProfileDB.objects.get(user=logged_in_user)
 
 
-    context = { 'blog': blog, 'profile':profile, 'comments': comments }
+    context = { 'blog': blog, 'profile':profile }
     return render(req, "post.html", context)
 
 
