@@ -98,7 +98,7 @@
                 <div class="post_info">
                     <a href="" class="category_button">{{ blog.category }}</a>
                     <h3 class="post_title"><a href="">{{ blog.title }}</a></h3>
-                    <p class="post_body">{{ blog.caption }}</p>
+                    <p class="post_body">{{ blog.caption|slice:":146"|default:blog.caption }}...</p>
                     <div class="post_author">
                         <div class="post_author-avatar">
                             <img src="{{ blog.author_profile.profile_image.url }}" alt="">

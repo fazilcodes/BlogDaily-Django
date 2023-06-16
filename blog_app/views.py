@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib import auth
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ObjectDoesNotExist
 
 from .models import UserProfileDB, BlogPostDB, CommentsDB
 
@@ -86,13 +87,18 @@ def Logout(req):
     auth.logout(req)
     return redirect('signin')
 
-
 def Profile(req, pk):
+    try:
+        user_object = User.objects.get(username=pk)
+        profile = UserProfileDB.objects.get(user=user_object)
+    except (User.DoesNotExist, UserProfileDB.DoesNotExist, ObjectDoesNotExist):
+        pass
 
-    user_object = User.objects.get(username=pk)
-    logged_in_user = User.objects.get(username=req.user.username)
-    profile = UserProfileDB.objects.get(user=user_object)
-    nav_image = UserProfileDB.objects.get(user=logged_in_user)
+    if req.user.is_authenticated:
+        logged_in_user = User.objects.get(username=req.user.username)
+        nav_image = UserProfileDB.objects.get(user=logged_in_user)
+    else:
+        nav_image = None
 
     blogs = BlogPostDB.objects.filter(author=user_object).order_by('-id')[:4]
 
@@ -104,13 +110,14 @@ def Post(req, id):
 
     profile = None
     blog = BlogPostDB.objects.get(id=id)
+    comments = CommentsDB.objects.filter(post=id)
 
     if req.user.is_authenticated:
         logged_in_user = User.objects.get(username=req.user.username)
         profile = UserProfileDB.objects.get(user=logged_in_user)
 
 
-    context = { 'blog': blog, 'profile':profile }
+    context = { 'blog': blog, 'profile':profile, 'comments': comments }
     return render(req, "post.html", context)
 
 

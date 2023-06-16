@@ -71,6 +71,22 @@
             <h2>Discussion</h2>
             {% if not request.user.is_authenticated %}
                 <a style="padding: .3rem .6rem; border: 1px solid var(--color-primary);" href="{% url 'signin' %}">Create An Account to Discuss</a>
+                <div class="comments_display">
+                    <div class="comment">
+                        {% if comments %}
+                        {% for comment in comments %}
+                        <div class="comment_box">
+                            <div class="comment_box-profile">
+                                <img src="{{ comment.commented_by.profile_image.url }}" alt="">
+                            </div>
+                            <p>@<span><a href="{% url 'profile' comment.commented_by.user.username %}" style="cursor: pointer;">{{ comment.commented_by.user.username }}: </a></span>{{ comment.comment }}</p>
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        <p>No comments yet...</p>
+                        {% endif %}
+                    </div>
+                </div>
             {% else %}
                 {% unicorn 'comments' blogid=blog.id %}
             {% endif %}
