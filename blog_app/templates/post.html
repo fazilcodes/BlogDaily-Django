@@ -1,4 +1,5 @@
 {% load unicorn %}
+{% load humanize %}
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
@@ -70,7 +71,15 @@
         <div class="single_post-comment">
             <h2>Discussion</h2>
             {% if not request.user.is_authenticated %}
-                <a style="padding: .3rem .6rem; border: 1px solid var(--color-primary);" href="{% url 'signin' %}">Create An Account to Discuss</a>
+                <div style="display: flex; justify-content: space-between;">
+                    <a style="padding: .3rem .6rem; border: 1px solid var(--color-primary);" href="{% url 'signin' %}">Create An Account to Discuss</a>
+                    {% if no_of_comments == 0 %}
+                    {% elif no_of_comments == 1 %}
+                    <p style="justify-self: flex-end; align-self: center;">{{ no_of_comments }} Comment</p>
+                    {% else %}
+                    <p style="justify-self: flex-end; align-self: center;">{{ no_of_comments }} Comments</p>
+                    {% endif %}
+                </div>
                 <div class="comments_display">
                     <div class="comment">
                         {% if comments %}
@@ -80,6 +89,7 @@
                                 <img src="{{ comment.commented_by.profile_image.url }}" alt="">
                             </div>
                             <p>@<span><a href="{% url 'profile' comment.commented_by.user.username %}" style="cursor: pointer;">{{ comment.commented_by.user.username }}: </a></span>{{ comment.comment }}</p>
+                            <p style="font-size: .5rem; justify-items: flex-end;">{{ comment.commented_on|timesince }} ago</p>
                         </div>
                         {% endfor %}
                         {% else %}

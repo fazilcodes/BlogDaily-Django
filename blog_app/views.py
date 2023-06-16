@@ -5,6 +5,7 @@ from django.contrib import auth
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
+from django.views.decorators.cache import never_cache
 
 from .models import UserProfileDB, BlogPostDB, CommentsDB
 
@@ -21,6 +22,7 @@ def Home(req):
     profile = None
     blogs = list(BlogPostDB.objects.all())
     random.shuffle(blogs)
+    blogs = blogs[:12]
 
     if req.user.is_authenticated:
         logged_in_user = User.objects.get(username=req.user)
@@ -82,10 +84,10 @@ def  Signin(req):
     
     return render(req, "LoginRegister.html")
 
-
+@never_cache
 def Logout(req):
     auth.logout(req)
-    return redirect('signin')
+    return redirect('home')
 
 def Profile(req, pk):
     try:
@@ -111,13 +113,14 @@ def Post(req, id):
     profile = None
     blog = BlogPostDB.objects.get(id=id)
     comments = CommentsDB.objects.filter(post=id)
+    no_of_comments = comments.count()
 
     if req.user.is_authenticated:
         logged_in_user = User.objects.get(username=req.user.username)
         profile = UserProfileDB.objects.get(user=logged_in_user)
 
 
-    context = { 'blog': blog, 'profile':profile, 'comments': comments }
+    context = { 'blog': blog, 'profile':profile, 'comments': comments, "no_of_comments": no_of_comments }
     return render(req, "post.html", context)
 
 
@@ -165,7 +168,7 @@ def AddBlog_Ajax(req):
         
 
 # --------Update Views----------------
-
+@never_cache
 def Updateprofile(req, id):
 
     profile = UserProfileDB.objects.get(id=id)
@@ -191,7 +194,7 @@ def Updateprofile(req, id):
     context = {'profile': profile}
     return render(req, 'updateprofile.html', context)
 
-
+@never_cache
 def Updateblog(req, id):
 
     blog = BlogPostDB.objects.get(id=id)

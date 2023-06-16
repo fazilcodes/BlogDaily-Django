@@ -1,5 +1,11 @@
 <div>
     <!-- put component code here -->
+            {% if no_of_comments == 0 %}
+            {% elif no_of_comments == 1 %}
+            <p style="text-align: right;">{{ no_of_comments }} Comment</p>
+            {% else %}
+            <p style="text-align: right;">{{ no_of_comments }} Comments</p>
+            {% endif %}
             {% if request.user.is_authenticated %}
             <form action="" class="comment_form">
                 {% csrf_token %}
@@ -16,6 +22,7 @@
                             <img src="{{ comment.commented_by.profile_image.url }}" alt="">
                         </div>
                         <p>@<span><a href="{% url 'profile' comment.commented_by.user.username %}" style="cursor: pointer;">{{ comment.commented_by.user.username }}: </a></span>{{ comment.comment }}</p>
+                        <p style="font-size: .5rem; justify-items: flex-end;">{{ comment.commented_on|timesince }} ago</p>
                     </div>
                     {% endfor %}
                     {% else %}

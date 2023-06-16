@@ -617,6 +617,20 @@ footer {
     
     .posts_container {
         grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .post {
+        width: 250px;
+        justify-self: center;
+        border: 2px solid var(--color-white);
+        padding: 1rem;
+        border-radius: 10px;
+    }
+
+    .post_thumbnail {
+        border-radius: 0;
+        border: 2px solid var(--color-primary-variant);
     }
 
     .category_buttons-container {
