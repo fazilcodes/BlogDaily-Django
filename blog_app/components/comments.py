@@ -11,7 +11,7 @@ class CommentsView(UnicornView):
     def mount(self):
         self.post = BlogPostDB.objects.get(id=self.blogid)
         self.commented_by = UserProfileDB.objects.get(user=self.request.user)
-        self.comments = CommentsDB.objects.filter(post=self.post.id)
+        self.comments = CommentsDB.objects.filter(post=self.post.id).order_by('-id')
         self.no_of_comments = self.comments.count()
         return super().mount()
     

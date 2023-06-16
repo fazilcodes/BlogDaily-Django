@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
     <!-- custom css -->
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
-    <title>Daily-blog</title>
+    <title>{% block title %}Daily-blog{% endblock %}</title>
 </head>
 <body>
     <!-- -------------Navbar------------------------ -->
@@ -18,7 +18,7 @@
             <a href="/" class="nav_logo">BLOG DAILY</a>
 
             <ul class="nav_items">
-                <li><a href="">Home</a></li>
+                <li><a href="/">Home</a></li>
                 {% if not request.user.is_authenticated %}
                 <li><a href="{% url 'signup' %}">Signin</a></li>
                 {% endif %}
@@ -44,6 +44,7 @@
 
     <!-- -------------Navbar END------------------------ -->
 
+    {% block content %}
     <!-- -------------Search---------------------------- -->
 
     <section class="search_bar">
@@ -98,7 +99,7 @@
                 <div class="post_info">
                     <a href="" class="category_button">{{ blog.category }}</a>
                     <h3 class="post_title"><a href="">{{ blog.title }}</a></h3>
-                    <p class="post_body">{{ blog.caption|slice:":146"|default:blog.caption }}...</p>
+                    <p class="post_body">{{ blog.caption|slice:":146"|default:blog.caption }}</p>
                     <div class="post_author">
                         <div class="post_author-avatar">
                             <img src="{{ blog.author_profile.profile_image.url }}" alt="">
@@ -115,23 +116,18 @@
         </div>
     </section>
 
-
     <!-- -------------Blog Posts END------------------------ -->
+    {% endblock %}
     
     <!-- -------------Category Buttons------------------------ -->
 
     <section class="category_buttons">
         <div class="container category_buttons-container">
-            <a href="" class="category_button">Programming</a>
-            <a href="" class="category_button">Development</a>
-            <a href="" class="category_button">Designs</a>
-            <a href="" class="category_button">Technologies</a>
-            <a href="" class="category_button">AI</a>
-            <a href="" class="category_button">Web</a>
+            {% for blog in blogs|slice:":6" %}
+            <a href="{% url 'category' blog.category %}" class="category_button">{{ blog.category|upper }}</a>
+            {% endfor %}
         </div>
     </section>
-
-
 
     <!-- -------------Category Buttons END------------------------ -->
 

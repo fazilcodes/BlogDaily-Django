@@ -59,7 +59,7 @@
                     <img src="{{ blog.author_profile.profile_image.url }}" alt="">
                 </div>
                 <div class="post_author-info">
-                    <h5>By: {{ blog.author.username }}</h5>
+                    <h5><a href="{% url 'profile' blog.author.username %}">{{ blog.author.username|capfirst }}</a></h5>
                     <small>{{ blog.blog_date }}</small>
                 </div>
             </div>

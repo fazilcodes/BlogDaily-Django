@@ -33,6 +33,17 @@ def Home(req):
     return render(req, "index.html", context)
 
 
+def Category_posts(req, pk):
+    blogs = list(BlogPostDB.objects.all())
+    random.shuffle(blogs)
+    category_blogs = list(BlogPostDB.objects.filter(category=pk))
+    random.shuffle(blogs)
+    logged_in_user = User.objects.get(username=req.user)
+    profile = UserProfileDB.objects.get(user=logged_in_user)
+    context = {'profile': profile, 'blogs': blogs, 'category_blogs': category_blogs, 'category': pk}
+    return render(req, 'category_post.html', context)
+
+
 def SignUp(req):
     if req.method == 'POST':
         name = req.POST.get("name")

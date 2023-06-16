@@ -1,0 +1,31 @@
+{% extends 'index.html' %}
+{% block title %}Category Based{% endblock %}
+{% block content %}
+<section class="posts" style="margin-top: 6rem;">
+    <h2 style="text-align: center; margin-bottom: 2rem; text-decoration: underline;">{{ category|title }} Blogs</h2>
+    <div class="container posts_container">
+        {% for blog in category_blogs %}
+        <article class="post">
+            <div class="post_thumbnail">
+                <img src="{{ blog.blog_image.url }}" alt="">
+            </div>
+            <div class="post_info">
+                <a href="" class="category_button">{{ blog.category }}</a>
+                <h3 class="post_title"><a href="">{{ blog.title }}</a></h3>
+                <p class="post_body">{{ blog.caption|slice:":146"|default:blog.caption }}</p>
+                <div class="post_author">
+                    <div class="post_author-avatar">
+                        <img src="{{ blog.author_profile.profile_image.url }}" alt="">
+                    </div>
+                    <div class="post_author-info">
+                        <h5>By: {{ blog.author.username }}</h5>
+                        <small>{{ blog.blog_date }}</small>
+                        <a href="{% url 'post' blog.id %}" class="readmore_blog">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
