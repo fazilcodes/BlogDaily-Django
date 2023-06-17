@@ -34,12 +34,14 @@ def Home(req):
 
 
 def Category_posts(req, pk):
+    profile = None
     blogs = list(BlogPostDB.objects.all())
     random.shuffle(blogs)
     category_blogs = list(BlogPostDB.objects.filter(category=pk))
     random.shuffle(blogs)
-    logged_in_user = User.objects.get(username=req.user)
-    profile = UserProfileDB.objects.get(user=logged_in_user)
+    if req.user.is_authenticated:
+        logged_in_user = User.objects.get(username=req.user)
+        profile = UserProfileDB.objects.get(user=logged_in_user)
     context = {'profile': profile, 'blogs': blogs, 'category_blogs': category_blogs, 'category': pk}
     return render(req, 'category_post.html', context)
 

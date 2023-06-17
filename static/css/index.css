@@ -385,6 +385,7 @@ footer {
     background: var(--color-primary-light);
     padding: 1rem 2rem 2rem;
     height: max-content;
+    position: relative;
 }
 
 .singlepost_thumbnail {
@@ -450,6 +451,8 @@ footer {
     object-fit: cover;
     border-radius: 50%;
 }
+
+
 
 
 /* -------------------------------------------------- MEDIA QUERY (MEDIUM) ---------------------------------------------------------- */
@@ -663,3 +666,31 @@ footer {
     }
 }
 
+/* ------------Like Button------------- */
+
+.heart {
+    width: 80px;
+    height: 80px;
+    background: url("https://cssanimation.rocks/images/posts/steps/heart.png") no-repeat;
+    background-position: 0 0;
+    cursor: pointer;
+    transition: background-position 1s steps(28);
+    transition-duration: 0s;
+    
+    &.is-active {
+      transition-duration: 1s;
+      background-position: -2800px 0;
+    }
+}
+
+.like_form {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.like_count {
+    position: absolute;
+    top: 3rem;
+    right: .9rem;
+}

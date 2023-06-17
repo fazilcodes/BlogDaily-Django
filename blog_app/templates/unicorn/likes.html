@@ -1,0 +1,25 @@
+{% if request.user.is_authenticated %}
+<div class="like_form">
+    <form action="">
+        {% csrf_token %}
+        <input unicorn:click.prevent="like_post" type="submit" value="" class="heart" unicorn:class="{'is-active': liked}" />
+    </form>
+    {% if no_of_likes == 1 %}
+    <p class="like_count">{{ no_of_likes }} like</p>
+    {% else %}
+    <p class="like_count">{{ no_of_likes }} likes</p>
+    {% endif %}
+</div>
+{% else %}
+<div class="like_form">
+    <form action="">
+        {% csrf_token %}
+        <a href="{% url 'signup' %}"><div class="heart"></div></a>
+    </form>
+    {% if no_of_likes == 1 %}
+    <p class="like_count">{{ no_of_likes }} like</p>
+    {% else %}
+    <p class="like_count">{{ no_of_likes }} likes</p>
+    {% endif %}
+</div>
+{% endif %}

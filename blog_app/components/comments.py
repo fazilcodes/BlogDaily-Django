@@ -16,9 +16,12 @@ class CommentsView(UnicornView):
         return super().mount()
     
     def add_comment(self):
-        new_comment = CommentsDB.objects.create(comment=self.comment, post=self.post, commented_by=self.commented_by)
-        new_comment.save()
+        if self.comment:
+            new_comment = CommentsDB.objects.create(comment=self.comment, post=self.post, commented_by=self.commented_by)
+            new_comment.save()
 
-        self.comments = CommentsDB.objects.filter(post=self.blogid)
-        self.no_of_comments = self.comments.count()
-        self.comment = "" 
+            self.comments = CommentsDB.objects.filter(post=self.blogid)
+            self.no_of_comments = self.comments.count()
+            self.comment = ""
+        else:
+            pass

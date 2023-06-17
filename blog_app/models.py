@@ -31,6 +31,7 @@ class BlogPostDB(models.Model):
     caption = models.TextField(blank=True)
     blog_date = models.DateField(auto_now_add=True)
     category = models.CharField(max_length=100)
+    likes = models.ManyToManyField(User, related_name='blog_likes')
 
     def __str__(self) -> str:
         return self.author.get_username()
