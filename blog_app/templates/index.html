@@ -48,10 +48,11 @@
     <!-- -------------Search---------------------------- -->
 
     <section class="search_bar">
-        <form action="" class="container search_bar-container">
+        <form action="{% url 'search' %}" class="container search_bar-container" method="post">
+            {% csrf_token %}
             <div>
                 <i class="uil uil-search"></i>
-                <input type="search" name="" placeholder="Search">
+                <input type="search" name="search_query" placeholder="Search">
             </div>
             <button type="submit" class="btn">GO</button>
         </form>

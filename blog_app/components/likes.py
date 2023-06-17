@@ -21,9 +21,11 @@ class LikesView(UnicornView):
         if self.liked_by in self.post.likes.all():
             self.post.likes.remove(self.liked_by)
             self.liked = False
+            print(self.liked)
         else:
             self.post.likes.add(self.liked_by)
             self.post.save()
             self.liked = True
+            print(self.liked)
         
         self.no_of_likes = self.post.likes.count()

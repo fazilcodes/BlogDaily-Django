@@ -1,0 +1,49 @@
+{% extends 'index.html' %}
+{% block title %}Search Result{% endblock %}
+{% block content %}
+{% load static %}
+<section class="search_section">
+    <h2 style="text-align: center; text-decoration: underline; margin-bottom: 2rem;">Search Result for <span style="color: var(--color-primary)">{{ search|capfirst }}</span></h2>
+    <div class="container search_container">
+        <div class="search_blogs">
+            {% for blog in search_blogs %}
+            <article class="post" style="border: 2px solid var(--color-primary); padding: 1rem;">
+                <div class="post_thumbnail" style="border-radius: 0; border: 2px solid var(--color-primary);">
+                    <img src="{{ blog.blog_image.url }}" alt="">
+                </div>
+                <div class="post_info">
+                    <a href="" class="category_button">{{ blog.category }}</a>
+                    <h3 class="post_title"><a href="">{{ blog.title }}</a></h3>
+                    <div class="post_author">
+                        <div class="post_author-avatar">
+                            <img src="{{ blog.author_profile.profile_image.url }}" alt="">
+                        </div>
+                        <div class="post_author-info">
+                            <h5><a href="{% url 'profile' blog.author.username %}">{{ blog.author.username }}</a></h5>
+                            <small>{{ blog.blog_date }}</small>
+                            <a href="{% url 'post' blog.id %}" class="readmore_blog">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            {% empty %}
+            <p>No blog result found for {{ search }}</p>
+            {% endfor %}
+        </div>
+        <!-- --------------- -->
+        <div class="search_users">
+            <h4 style="text-align: center;">users</h4>
+            {% for user in users %}
+            <div class="single_user">
+                <div class="user_img">
+                    <img src="{{ user.profile_image.url }}" alt="">
+                </div>
+                <a href="{% url 'profile' user.user.username %}"><p>{{user.user.username}}</p></a>
+            </div>
+            {% empty %}
+            <p>No users found for {{ search }}</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.views.decorators.cache import never_cache
+from django.db.models import Q
 
 from .models import UserProfileDB, BlogPostDB, CommentsDB
 
@@ -234,7 +235,33 @@ def Updateblog(req, id):
     context = {"blogid": blog}
     return render(req, 'updateblog.html', context)
 
-           
+
+# ----------search view----------------------
+
+def Search(req):
+
+    profile = None
+    blogs = list(BlogPostDB.objects.all())
+    random.shuffle(blogs)
+    if req.user.is_authenticated:
+        logged_in_user = User.objects.get(username=req.user)
+        profile = UserProfileDB.objects.get(user=logged_in_user)
+    
+    search = req.POST.get('search_query')
+    search_blogs = []
+    users = []
+
+    if req.method == 'POST' and search:
+        search_blogs = list(BlogPostDB.objects.filter(Q(title__istartswith=search)))
+        random.shuffle(search_blogs)
+        users = list(UserProfileDB.objects.filter(Q(profil_name__istartswith=search)))
+        random.shuffle(users)
+
+
+    context = {'profile': profile, 'blogs': blogs, 'search_blogs': search_blogs ,'search': search, 'users': users}
+    return render(req, 'search.html', context)
+
+
 
 
 

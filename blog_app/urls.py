@@ -12,5 +12,6 @@ urlpatterns = [
     path('addblogajax', views.AddBlog_Ajax, name='ajax'),
     path('updateblog/<int:id>', views.Updateblog, name="updateblog"),
     path('updateprofile/<int:id>', views.Updateprofile, name='updateprofile'),
-    path('category/<str:pk>', views.Category_posts, name='category')
+    path('category/<str:pk>', views.Category_posts, name='category'),
+    path('search/', views.Search, name='search')
 ]
