@@ -7,6 +7,8 @@ from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.views.decorators.cache import never_cache
 from django.db.models import Q
+from django.db.models import Count
+from django.db import models
 
 from .models import UserProfileDB, BlogPostDB, CommentsDB
 
@@ -28,9 +30,22 @@ def Home(req):
     if req.user.is_authenticated:
         logged_in_user = User.objects.get(username=req.user)
         profile = UserProfileDB.objects.get(user=logged_in_user)
-        
+    
+    annotated_blogs = BlogPostDB.objects.annotate(
+        num_likes=Count('likes'),
+        num_comments=Count('commentsdb')
+    )
 
-    context = {'profile': profile, 'blogs': blogs}
+    # Calculate a score for each blog based on likes and comments count
+    annotated_blogs = annotated_blogs.annotate(score=models.F('num_likes') + models.F('num_comments'))
+
+    # Get the top 5 blogs with the highest score
+    featured_blogs = annotated_blogs.order_by('-score')[:5]
+
+    # Randomly select a featured blog
+    featured_blog = random.choice(featured_blogs) if featured_blogs else None
+
+    context = {'profile': profile, 'blogs': blogs, 'featured_blog': featured_blog}
     return render(req, "index.html", context)
 
 
