@@ -20,7 +20,7 @@ class CommentsView(UnicornView):
             new_comment = CommentsDB.objects.create(comment=self.comment, post=self.post, commented_by=self.commented_by)
             new_comment.save()
 
-            self.comments = CommentsDB.objects.filter(post=self.blogid)
+            self.comments = CommentsDB.objects.filter(post=self.blogid).order_by('-id')
             self.no_of_comments = self.comments.count()
             self.comment = ""
         else:

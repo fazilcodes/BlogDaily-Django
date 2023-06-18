@@ -141,7 +141,7 @@ def Post(req, id):
 
     profile = None
     blog = BlogPostDB.objects.get(id=id)
-    comments = CommentsDB.objects.filter(post=id)
+    comments = CommentsDB.objects.filter(post=id).order_by('-id')
     no_of_comments = comments.count()
 
     if req.user.is_authenticated:
