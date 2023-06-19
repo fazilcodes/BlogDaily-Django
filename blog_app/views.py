@@ -277,7 +277,13 @@ def Search(req):
     return render(req, 'search.html', context)
 
 
+# ----------Delete View--------------
 
+def Deleteblog(req, id):
+    blog = BlogPostDB.objects.get(id=id)
+    blog.delete()
+
+    return redirect('addblog')
 
 
 
