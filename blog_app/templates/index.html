@@ -63,14 +63,15 @@
     <!-- -------------Featured------------------------ -->
 
     <section class="featured">
+        {% if featured_blog %}
         <div class="container featured_container">
             <div class="post_thumbnail">
                 <img src="{{ featured_blog.blog_image.url }}" alt="">
             </div>
             <div class="post_info">
-                <a href="" class="category_button">{{ featured_blog.category }}</a>
+                <a href="{% url 'category' featured_blog.category %}" class="category_button">{{ featured_blog.category|upper }}</a>
                 <h2 class="post_title"><a href="">{{ featured_blog.title }}</a></h2>
-                <p class="post_body">{{ featured_blog.caption }}</p>
+                <p class="post_body">{{ featured_blog.caption|slice:":700"|default:featured_blog.caption }}</p>
                 <div class="post_author">
                     <div class="post_author-avatar">
                         <img src="{{ featured_blog.author_profile.profile_image.url }}" alt="">
@@ -83,6 +84,9 @@
                 </div>
             </div>
         </div>
+        {% else %}
+        <h2 style="text-align: center;">Currently Developing....</h2>
+        {% endif %}
     </section>
 
 
@@ -98,7 +102,7 @@
                     <img src="{{ blog.blog_image.url }}" alt="">
                 </div>
                 <div class="post_info">
-                    <a href="" class="category_button">{{ blog.category }}</a>
+                    <a href="{% url 'category' blog.category %}" class="category_button">{{ blog.category|upper }}</a>
                     <h3 class="post_title"><a href="">{{ blog.title }}</a></h3>
                     <p class="post_body">{{ blog.caption|slice:":146"|default:blog.caption }}</p>
                     <div class="post_author">
@@ -106,7 +110,7 @@
                             <img src="{{ blog.author_profile.profile_image.url }}" alt="">
                         </div>
                         <div class="post_author-info">
-                            <h5>By: {{ blog.author.username }}</h5>
+                            <h5>By: {{ blog.author.username|capfirst }}</h5>
                             <small>{{ blog.blog_date }}</small>
                             <a href="{% url 'post' blog.id %}" class="readmore_blog">Read More</a>
                         </div>
@@ -124,8 +128,8 @@
 
     <section class="category_buttons">
         <div class="container category_buttons-container">
-            {% for blog in blogs|slice:":6" %}
-            <a href="{% url 'category' blog.category %}" class="category_button">{{ blog.category|upper }}</a>
+            {% for category in categories|slice:":6" %}
+            <a href="{% url 'category' category %}" class="category_button">{{ category|upper }}</a>
             {% endfor %}
         </div>
     </section>

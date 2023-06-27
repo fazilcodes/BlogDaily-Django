@@ -89,8 +89,8 @@
                     <div class="profile_blog-img">
                         <img src="{{ blog.blog_image.url }}" alt="">
                     </div>
-                    <p class="profile_post-title">{{ blog.title }}</p>
-                    <p class="profile_post-category">{{ blog.category }}</p>
+                    <h3 class="profile_post-title">{{ blog.title }}</h3>
+                    <p class="profile_post-category">{{ blog.category|upper }}</p>
                     <div class="profile_blog-buttons">
                         <a href="{% url 'post' blog.id %}" class="profile_page-view">View</a>
                     </div>

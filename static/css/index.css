@@ -419,12 +419,15 @@ footer {
     border: 1px solid white;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 1rem;
 }
 
 .comment_input {
     background: transparent;
     color: white;
+    flex: 80%;
+    margin-right: .5rem;
 }
 
 .comments_display {

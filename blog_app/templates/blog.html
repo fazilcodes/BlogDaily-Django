@@ -75,8 +75,8 @@
                     <div class="profile_blog-img">
                         <img src="{{ blog.blog_image.url }}" alt="">
                     </div>
-                    <p class="profile_post-title">{{ blog.title }}</p>
-                    <p class="profile_post-category">{{ blog.category }}</p>
+                    <h4 class="profile_post-title">{{ blog.title }}</h4>
+                    <p class="profile_post-category">{{ blog.category|upper }}</p>
                     <div class="profile_blog-buttons">
                         <div>
                             <a href="{% url 'updateblog' blog.id %}" class="profile_page-edit"><i class="uil uil-edit"></i></a>
@@ -129,7 +129,7 @@
                                 <div class="profile_blog-img">
                                     <img src="${response.blog_image}" alt="">
                                 </div>
-                                <p class="profile_post-title">${response.title}</p>
+                                <h4 class="profile_post-title">${response.title}</h4>
                                 <p class="profile_post-category">${response.category}</p>
                                 <div class="profile_blog-buttons">
                                     <div>

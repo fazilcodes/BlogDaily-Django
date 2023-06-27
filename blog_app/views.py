@@ -24,7 +24,9 @@ def Home(req):
 
     profile = None
     blogs = list(BlogPostDB.objects.all())
+    blog_categories = list(BlogPostDB.objects.values_list('category', flat=True).distinct())
     random.shuffle(blogs)
+    random.shuffle(blog_categories)
     blogs = blogs[:12]
 
     if req.user.is_authenticated:
@@ -45,7 +47,7 @@ def Home(req):
     # Randomly select a featured blog
     featured_blog = random.choice(featured_blogs) if featured_blogs else None
 
-    context = {'profile': profile, 'blogs': blogs, 'featured_blog': featured_blog}
+    context = {'profile': profile, 'blogs': blogs, 'featured_blog': featured_blog, 'categories': blog_categories}
     return render(req, "index.html", context)
 
 
@@ -267,9 +269,9 @@ def Search(req):
     users = []
 
     if req.method == 'POST' and search:
-        search_blogs = list(BlogPostDB.objects.filter(Q(title__istartswith=search)))
+        search_blogs = list(BlogPostDB.objects.filter(Q(title__icontains=search) | Q(category__icontains=search)))
         random.shuffle(search_blogs)
-        users = list(UserProfileDB.objects.filter(Q(profil_name__istartswith=search)))
+        users = list(UserProfileDB.objects.filter(Q(profil_name__icontains=search)))
         random.shuffle(users)
 
 
