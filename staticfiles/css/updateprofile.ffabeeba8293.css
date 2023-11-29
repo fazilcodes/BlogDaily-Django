@@ -1,0 +1,13 @@
+.updateprofile_image {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    align-self: center;
+    border-radius: 50%;
+}
+
+.updateprofile_image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
