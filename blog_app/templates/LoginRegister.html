@@ -66,7 +66,7 @@
 <!-- Mobile device container -->
 <div class="container mobile_signup-container">
 	<div class="mobile_form-container">
-		<form action="{% url 'signin' %}">
+		<form action="{% url 'signin' %}" method="post">
 			{% csrf_token %}
 			<h1>Sign in</h1>
 			<div class="social-container">
@@ -83,7 +83,7 @@
 		</form>
 	</div>
 	<div class="mobile_formtwo-container">
-		<form action="{% url 'signup' %}">
+		<form action="{% url 'signup' %}" method="post">
 			{% csrf_token %}
 			<h1>Create Account</h1>
 			<div class="social-container">
